@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新人指南 · New Worker Guide · Panduan Karyawan Baru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0;
+    --paper-alt:#F1ECE0;
+    --ink:#2B2A26;
+    --ink-soft:#6B665C;
+    --teal:#1E6E67;
+    --teal-deep:#144D48;
+    --marigold:#D99A34;
+    --clay:#B84C3C;
+    --line:#DDD5C4;
+    --card:#FFFFFF;
+  }
+  :root:not([data-theme="light"]){
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1C1B18;
+      --paper-alt:#242320;
+      --ink:#F1ECE3;
+      --ink-soft:#B7B0A2;
+      --teal:#4FA89E;
+      --teal-deep:#2E7B72;
+      --marigold:#E3AC52;
+      --clay:#E27363;
+      --line:#3A382F;
+      --card:#25241F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1C1B18;
+    --paper-alt:#242320;
+    --ink:#F1ECE3;
+    --ink-soft:#B7B0A2;
+    --teal:#4FA89E;
+    --teal-deep:#2E7B72;
+    --marigold:#E3AC52;
+    --clay:#E27363;
+    --line:#3A382F;
+    --card:#25241F;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 20px 64px;
+  }
+
+  /* ---- Top bar / language switch ---- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:14px 20px;
+  }
+  .topbar-inner{
+    max-width:720px; margin:0 auto;
+    display:flex; align-items:center; gap:10px;
+    flex-wrap:wrap;
+  }
+  .lang-btn{
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:background .18s ease, color .18s ease, border-color .18s ease, transform .12s ease;
+  }
+  .lang-btn:hover{ transform:translateY(-1px); }
+  .lang-btn.active{
+    background:var(--teal);
+    border-color:var(--teal);
+    color:#fff;
+  }
+  .lang-btn:focus-visible, button:focus-visible, a:focus-visible{
+    outline:2px solid var(--marigold);
+    outline-offset:2px;
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:44px 0 28px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:32px;
+  }
+  .hero-eyebrow{
+    display:flex; gap:8px; align-items:center;
+    color:var(--teal-deep);
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:14px;
+  }
+  .hero-eyebrow svg{ width:20px; height:20px; flex:none; }
+  .hero h1{
+    font-family:'Noto Serif TC', serif;
+    font-weight:800;
+    font-size:clamp(28px,6vw,40px);
+    line-height:1.25;
+    margin:0 0 14px;
+  }
+  .hero p{
+    font-size:16px;
+    line-height:1.75;
+    color:var(--ink-soft);
+    margin:0;
+    max-width:56ch;
+  }
+
+  /* ---- Notice card (leave request) ---- */
+  .notice{
+    background:var(--card);
+    border:1.5px solid var(--clay);
+    border-radius:14px;
+    padding:24px 22px;
+    margin-bottom:36px;
+    position:relative;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .notice-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--clay);
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:10px;
+  }
+  .notice-tag svg{ width:18px; height:18px; }
+  .notice h2{
+    font-size:19px;
+    margin:0 0 10px;
+    line-height:1.5;
+  }
+  .notice p{
+    font-size:15.5px;
+    line-height:1.8;
+    margin:0;
+    color:var(--ink);
+  }
+
+  /* ---- Section headings ---- */
+  section.block{ margin-bottom:44px; }
+  .block-head{
+    display:flex; align-items:baseline; gap:12px;
+    margin-bottom:18px;
+  }
+  .block-head h2{
+    font-family:'Noto Serif TC', serif;
+    font-size:24px;
+    font-weight:700;
+    margin:0;
+  }
+  .block-head span.sub{
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+
+  /* ---- Duties grid ---- */
+  .duties{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:520px){
+    .duties{ grid-template-columns:1fr; }
+  }
+  .duty{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 16px;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .duty svg{
+    width:30px; height:30px; flex:none;
+    color:var(--teal);
+  }
+  .duty h3{
+    font-size:15.5px;
+    margin:0 0 4px;
+    font-weight:700;
+  }
+  .duty p{
+    margin:0;
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+  }
+
+  /* ---- Learning checklist ---- */
+  .steps{
+    list-style:none;
+    margin:0; padding:0;
+    border-left:2px solid var(--line);
+  }
+  .step{
+    position:relative;
+    padding:0 0 26px 26px;
+  }
+  .step:last-child{ padding-bottom:0; }
+  .step::before{
+    content:attr(data-n);
+    position:absolute;
+    left:-15px; top:0;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--marigold);
+    color:#2B2A26;
+    font-weight:800;
+    font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h3{
+    margin:0 0 5px;
+    font-size:16px;
+    font-weight:700;
+  }
+  .step p{
+    margin:0;
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:22px;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+
+  [data-lang-block]{ display:none; }
+  [data-lang-block].show{ display:block; }
+  .duty[data-lang-block], .step[data-lang-block]{ display:none; }
+  .duty[data-lang-block].show{ display:flex; }
+  .step[data-lang-block].show{ display:block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+      <span data-lang-block="zh" class="show">給新來的印尼工讀生</span>
+      <span data-lang-block="en">For our new student workers from Indonesia</span>
+      <span data-lang-block="id">Untuk karyawan paruh waktu baru dari Indonesia</span>
+    </div>
+    <h1>
+      <span data-lang-block="zh" class="show">歡迎加入，這是你的入門指南</span>
+      <span data-lang-block="en">Welcome aboard — here's your starter guide</span>
+      <span data-lang-block="id">Selamat bergabung — ini panduan awal untuk kamu</span>
+    </h1>
+    <p>
+      <span data-lang-block="zh" class="show">這頁面告訴你可以先學什麼、平常主要在做什麼工作，還有一件最重要的事：請假的規定。</span>
+      <span data-lang-block="en">This page covers what to learn first, what your main tasks will be, and one very important rule about taking leave.</span>
+      <span data-lang-block="id">Halaman ini berisi hal-hal yang perlu dipelajari lebih dulu, tugas utama sehari-hari, dan satu aturan paling penting tentang izin tidak masuk kerja.</span>
+    </p>
+  </section>
+
+  <div class="notice">
+    <div class="notice-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span data-lang-block="zh" class="show">最重要的事</span>
+      <span data-lang-block="en">Most important rule</span>
+      <span data-lang-block="id">Aturan paling penting</span>
+    </div>
+    <h2>
+      <span data-lang-block="zh" class="show">沒辦法來上班，一定要「先」請假</span>
+      <span data-lang-block="en">If you can't come to work, request leave first</span>
+      <span data-lang-block="id">Jika tidak bisa masuk kerja, harus izin lebih dulu</span>
+    </h2>
+    <p>
+      <span data-lang-block="zh" class="show">如果生病、有事、或任何原因不能來上班，請務必「事先」跟主管請假，不可以直接不到、也不可以事後才說。臨時狀況也要盡快用電話或訊息告知，不要等到上班時間才聯絡。</span>
+      <span data-lang-block="en">If you're sick, have something come up, or for any reason cannot come to work, you must ask your supervisor for leave in advance. Never simply not show up, and never explain only after the fact. Even in a sudden situation, call or message as early as possible — don't wait until your shift has already started.</span>
+      <span data-lang-block="id">Jika sakit, ada urusan, atau alasan apa pun sehingga tidak bisa masuk kerja, kamu wajib izin kepada atasan terlebih dahulu. Jangan langsung tidak masuk tanpa kabar, dan jangan baru menjelaskan setelahnya. Kalau situasinya mendadak, tetap hubungi lewat telepon atau pesan sesegera mungkin — jangan menunggu sampai jam kerja dimulai.</span>
+    </p>
+  </div>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>
+        <span data-lang-block="zh" class="show">主要工作內容</span>
+        <span data-lang-block="en">Your main tasks</span>
+        <span data-lang-block="id">Tugas utama kamu</span>
+      </h2>
+    </div>
+    <div class="duties">
+
+      <div class="duty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <div>
+          <h3>
+            <span data-lang-block="zh" class="show">協助拍照</span>
+            <span data-lang-block="en">Help take photos</span>
+            <span data-lang-block="id">Membantu mengambil foto</span>
+          </h3>
+          <p>
+            <span data-lang-block="zh" class="show">活動或工作現場的紀錄拍照</span>
+            <span data-lang-block="en">Photo documentation for events or on-site work</span>
+            <span data-lang-block="id">Dokumentasi foto untuk acara atau kegiatan kerja</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="duty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
