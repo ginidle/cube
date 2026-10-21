@@ -1,7 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>全民集氣｜颱風快走開，10/25 演唱會要開唱！</title>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg1:#0b1033;--bg2:#2a1458;--ink:#fff;--mute:#b9b6e0;--gold:#ffd54a;--pink:#ff5fa2;--card:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 70%,#5a1c6b);color:var(--ink);font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;text-align:center;overflow-x:hidden}
+main{max-width:480px;margin:0 auto;padding:20px 16px 40px;position:relative}
+.sunbg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.6s ease;background:linear-gradient(180deg,#2f9bff,#8fd4ff 60%,#ffe9a8)}
+body.sunny{--mute:#eef8ff;--card:rgba(0,40,90,.28)}
+body.sunny main{text-shadow:0 1px 4px rgba(0,40,90,.55)}
+h1{font-size:26px;margin:8px 0 4px;line-height:1.3}
+h1 span{color:var(--gold)}
+.sub{color:var(--mute);font-size:14px;margin:0 0 14px}
+.count{display:flex;gap:8px;justify-content:center;margin:10px 0}
+.count div{background:var(--card);border-radius:12px;padding:8px 10px;min-width:64px}
+.count b{display:block;font-size:24px;color:var(--gold)}
+.count small{font-size:11px;color:var(--mute)}
+.sky{position:relative;height:130px;margin:10px 0;border-radius:18px;background:linear-gradient(90deg,#2b2f5e,#1a1f4a);overflow:hidden}
+.sun{position:absolute;right:16px;top:14px;font-size:44px;transition:opacity 1s,transform 1s}
+.ty{position:absolute;top:34px;font-size:64px;animation:spin 3s linear infinite;transition:left 1.2s ease,opacity 1.2s,transform 1.2s}
+@keyframes spin{to{rotate:360deg}}
+.sky p{position:absolute;bottom:6px;left:0;right:0;margin:0;font-size:12px;color:var(--mute)}
+.total{font-size:48px;font-weight:800;color:var(--gold);margin:6px 0 0;font-variant-numeric:tabular-nums}
+.lbl{color:var(--mute);font-size:13px}
+.bar{height:12px;background:var(--card);border-radius:8px;overflow:hidden;margin:12px 0 4px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .5s}
+.goal{font-size:12px;color:var(--mute)}
+#tap{margin:22px auto 8px;width:200px;height:200px;border-radius:50%;border:0;color:#fff;font-size:30px;font-weight:800;cursor:pointer;background:radial-gradient(circle at 35% 30%,#ff9acb,var(--pink) 55%,#b3246f);box-shadow:0 0 0 8px rgba(255,95,162,.2),0 0 40px rgba(255,95,162,.6);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .08s}
+#tap:active{transform:scale(.93)}
+#tap small{display:block;font-size:14px;font-weight:500;margin-top:4px}
+.mine{font-size:14px;color:var(--mute)}
+.mine b{color:var(--gold)}
+.note{font-size:12px;color:var(--mute);margin-top:14px;min-height:16px}
+.pop{position:fixed;pointer-events:none;font-size:28px;animation:up 1.2s ease-out forwards;z-index:9}
+@keyframes up{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-130px) scale(1.5)}}
+.msg{background:var(--card);border-radius:12px;padding:10px;font-size:13px;margin-top:16px;line-height:1.6}
+</style>
+</head>
 <body>
-<h1>This is page 2</h1>
-<a href="page1.html">Go to page 1</a>
+<div class="sunbg" id="sunbg"></div>
+<main>
+  <h1>🎤 全民集氣！<br><span>颱風快走開</span></h1>
+  <p class="sub">10/25 演唱會，一起把雲推走 ☀️</p>
+
+  <div class="count" aria-label="演唱會倒數">
+    <div><b id="d">-</b><small>天</small></div>
+    <div><b id="h">-</b><small>時</small></div>
+    <div><b id="m">-</b><small>分</small></div>
+    <div><b id="s">-</b><small>秒</small></div>
+  </div>
+
+  <div class="sky">
+    <div class="sun" id="sun">☀️</div>
+    <div class="ty" id="ty">🌀</div>
+    <p id="skyTxt">颱風正在靠近⋯⋯大家一起集氣！</p>
+  </div>
+
+  <div class="total" id="total">0</div>
+  <div class="lbl">全體集氣值</div>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="goal" id="goal">下一個目標：100</div>
+
+  <button id="tap" type="button">集氣！<small>狂點越多越有效</small></button>
+  <div class="mine">我已貢獻 <b id="mine">0</b> 點氣</div>
+  <div class="note" id="note"></div>
+
+  <div class="msg">把連結傳給所有要去演唱會的人，<br>每個人都是一份力量 🙏<br>（連點、長按或鍵盤空白鍵都可以）</div>
+</main>
+
+<script>
+(function(){
+  // ===== 設定：貼上你的 Firebase Realtime Database 網址（結尾不要有 /）=====
+  var DB_URL = ""; // 例如 "https://your-project-default-rtdb.asia-southeast1.firebasedatabase.app"
+  // ==================================================================
+  var TARGET = new Date(2026,9,25,0,0,0); // 10/25 00:00（本地時間）
+  var $ = function(i){return document.getElementById(i)};
+  var emojis = ['✨','🙏','☀️','⭐','💖','🌈','🎶'];
+  var mine = 0, serverTotal = 0, pending = 0, sending = false, total = 0;
+
+  function tick(){
+    var ms = TARGET - new Date();
+    if(ms <= 0){ ['d','h','m','s'].forEach(function(k){$(k).textContent='0'}); return; }
+    var s = Math.floor(ms/1000);
+    $('d').textContent = Math.floor(s/86400);
+    $('h').textContent = Math.floor(s%86400/3600);
+    $('m').textContent = Math.floor(s%3600/60);
+    $('s').textContent = s%60;
+  }
+  tick(); setInterval(tick,1000);
+
+  var G=[100,300,500,1000,3000,5000,10000,30000,50000,100000,500000,1000000];
+  function nextGoal(n){ for(var i=0;i<G.length;i++) if(n<G[i]) return G[i]; return Math.ceil((n+1)/1000000)*1000000; }
+  function prevGoal(n){ var p=0; for(var i=0;i<G.length;i++) if(n>=G[i]) p=G[i]; return p; }
+
+  function render(){
+    total = serverTotal + pending;
+    if(!DB_URL) total = mine;
+    $('total').textContent = total.toLocaleString();
+    $('mine').textContent = mine.toLocaleString();
+    var ng = nextGoal(total), pg = prevGoal(total);
+    $('fill').style.width = Math.min(100,(total-pg)/(ng-pg)*100) + '%';
+    $('goal').textContent = '下一個目標：' + ng.toLocaleString() + '（還差 ' + (ng-total).toLocaleString() + '）';
+    var steps=[100,300,500,1000,3000,5000], lv=0;
+    steps.forEach(function(s){ if(total>=s) lv++; });
+    $('sunbg').style.opacity = String(total>=10000 ? 1 : lv/6*0.55);
+    document.body.classList.toggle('sunny', total>=10000);
+    var p = Math.min(1, total/10000);
+    var sky = $('ty').parentNode.clientWidth || 300;
+    $('ty').style.left = (10 + p*(sky-100)) + 'px';
+    $('ty').style.opacity = String(1 - p*0.85);
+    $('ty').style.transform = 'scale(' + (1 - p*0.5) + ')';
+    $('sun').style.transform = 'scale(' + (0.8 + p*0.5) + ')';
+    $('sun').style.opacity = String(0.4 + p*0.6);
+    $('skyTxt').textContent = p < .25 ? '颱風正在靠近⋯⋯大家一起集氣！'
+      : p < .6 ? '颱風開始轉彎了！繼續！' : p < 1 ? '颱風快被推走了！再一下！' : '颱風遠離！演唱會順利舉行 🎉';
+  }
+
+  function pop(x,y){
+    var e = document.createElement('span');
+    e.className = 'pop';
+    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = (x + (Math.random()*80-40)) + 'px';
+    e.style.top = (y - 20) + 'px';
+    document.body.appendChild(e);
+    setTimeout(function(){e.remove()},1200);
+  }
+
+  // 把累積的點擊送到資料庫（每次最多 100，原子加總）
+  function flush(){
+    if(!DB_URL || sending || pending <= 0) return;
+    var n = Math.min(pending, 100);
+    sending = true;
+    fetch(DB_URL + '/total.json', {method:'PUT', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({".sv":{"increment":n}})})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(v){
+      pending -= n;
+      serverTotal = (typeof v === 'number') ? v : serverTotal + n;
+      $('note').textContent = '';
+      render();
+    })
+    .catch(function(){ $('note').textContent = '連線不穩，稍後會自動重送。'; })
+    .then(function(){ sending = false; });
+  }
+  function poll(){
+    if(!DB_URL) return;
+    fetch(DB_URL + '/total.json').then(function(r){ return r.json(); }).then(function(v){
+      if(typeof v === 'number' && !sending){ serverTotal = v; render(); }
+    }).catch(function(){});
+  }
+
+  function hit(x,y){
+    mine++; pending++;
+    render(); pop(x,y);
+    try{ if(navigator.vibrate) navigator.vibrate(8); }catch(e){}
+    try{ localStorage.setItem('typhoon-mine', String(mine)); }catch(e){}
+  }
+
+  var btn = $('tap'), hold = null;
+  btn.addEventListener('pointerdown', function(e){
+    hit(e.clientX, e.clientY);
+    clearInterval(hold);
+    hold = setInterval(function(){ var r=btn.getBoundingClientRect(); hit(r.left+r.width/2+(Math.random()*60-30), r.top+30); }, 160);
+  });
+  ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ btn.addEventListener(ev, function(){ clearInterval(hold); }); });
+  btn.addEventListener('keydown', function(e){
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); var r=btn.getBoundingClientRect(); hit(r.left+r.width/2, r.top+20); }
+  });
+
+  try{ var s = parseInt(localStorage.getItem('typhoon-mine')||'0',10); if(s>0) mine = s; }catch(e){}
+  window.addEventListener('resize', render);
+
+  if(!DB_URL){
+    $('note').textContent = '尚未設定資料庫，目前只顯示你自己的集氣值。';
+  } else {
+    setInterval(flush, 1500);
+    setInterval(poll, 4000);
+    poll();
+    window.addEventListener('pagehide', function(){
+      if(pending > 0){ try{ fetch(DB_URL + '/total.json', {method:'PUT', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify({".sv":{"increment":Math.min(pending,100)}})}); }catch(e){} }
+    });
+  }
+  render();
+})();
+</script>
 </body>
 </html>
