@@ -63,6 +63,19 @@ button{background:var(--card);border:1px solid var(--line);color:var(--sub);bord
 #lunch .food{background:rgba(255,241,225,.72);border-color:rgba(255,255,255,.85);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 8px 24px rgba(200,110,40,.14)}
 #lunch .food .tag{background:rgba(224,117,42,.12);color:#b95a17}
 #lunch .food a.go,#lunch .food .no{background:linear-gradient(135deg,#f08a3c,#d9651c);color:#fff}
+
+.g{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;margin:10px 0;overflow:hidden}
+.g summary{cursor:pointer;padding:13px 14px;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.g summary::-webkit-details-marker{display:none}
+.g summary::after{content:"＋";color:var(--accent);font-family:ui-monospace,Menlo,monospace}
+.g[open] summary::after{content:"－"}
+.g ul{margin:0;padding:0 14px 14px 32px;font-size:14px}
+.g li{margin:6px 0}
+.g li b{color:var(--accent)}
+.g .bad li b{color:#b3261e}
+.g .tip{margin:0 14px 14px;padding:9px 11px;border-radius:10px;background:rgba(68,88,122,.08);border:1px solid var(--edge);font-size:13px;color:var(--sub)}
+.gl{display:inline-block;margin:2px 0 8px;font-size:13px}
+.gl a{color:var(--accent)}
 </style>
 <script>
 window.addEventListener('DOMContentLoaded',function(){
@@ -171,6 +184,8 @@ document.getElementById("dl").onclick=async function(){
       <div><b>活動</b>　Music Expo Live 2026 in Taipei・10/25（日）Day 2</div>
       <div><b>地點</b>　台北小巨蛋</div>
       <div><b>開演</b>　18:00　<b>MC</b>　櫻井翔</div>
+      <div><b>入場</b>　預計 16:30　<b>長度</b>　約 150 分鐘</div>
+      <div><b>票務櫃台</b>　16:00–18:30（6 號門）</div>
     </div>
     <ol class="order">
       <li class="sp">OPENING<small>全體藝人</small></li>
@@ -202,6 +217,67 @@ document.getElementById("dl").onclick=async function(){
     </div>
   </div>
 
+
+
+  <div class="sec" id="guide">
+    <h2>📋 演唱會入場須知</h2>
+    <div class="gl">資料來源：<a href="https://www.instagram.com/p/DevgAmJGSoO/?xtok=bGMzMXJzY3pnbWV4" target="_blank" rel="noopener">寬宏藝術 IG 公告</a>（實際以現場公告為準）</div>
+
+    <details class="g" open><summary>🪪 實名制入場・票務</summary>
+      <ul>
+        <li>攜帶<b>身分證／健保卡／護照正本</b>，姓名與證號須與票券相符，不符無法入場。</li>
+        <li>每次進出場都會查票，沒有有效票券無法入場或再入場。</li>
+        <li>寬宏實名制會員帳號：本國籍用<b>身分證字號</b>、非本國籍用<b>護照號碼</b>。</li>
+        <li>現場取票：到票務服務櫃台，出示<b>訂單編號</b>＋<b>購票人身分證件正本</b>（不接受影印、截圖）。</li>
+        <li>超商取票者請在演出前幾天先取好票；票券遺失請在演出前先聯繫寬宏售票。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🚪 入口與安全檢查</summary>
+      <ul>
+        <li>持票觀眾入口：<b>北大門（5 號）</b>、<b>南大門</b>；票務櫃台在 <b>6 號門</b>。</li>
+        <li>拍照背板在 6 號門旁、南京東路與敦化北路路口附近。</li>
+        <li>入場有手提物檢查，請提早到場。</li>
+        <li>電子寄物櫃在主場館 <b>9 號出入口</b>與<b>西側廁所旁</b>，數量有限，客服 0800-458-075。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🚫 禁止攜帶物品</summary>
+      <ul class="bad">
+        <li><b>食物、飲料</b>（飲用水除外）。</li>
+        <li>長＋寬＋高<b>總和超過 90 公分</b>的包包、行李箱。</li>
+        <li><b>專業相機</b>、錄音機、攝影機材、增倍鏡頭（手機可以）。</li>
+        <li>各類武器、刀械。</li>
+        <li><b>GoPro、自拍棒</b>、長竿、三腳架、板凳等自行加高裝置。</li>
+        <li>雷射筆、煙火、噴煙裝置、充氣物、<b>無人機</b>。</li>
+        <li>會發出噪音的物品（如哨子、氣笛）。</li>
+        <li><b>含桿子或長竿</b>的標語、旗幟、橫幅、海報；內容不得有商業或不當政治訊息。</li>
+        <li>其他經主辦判斷有危險性的物品。</li>
+      </ul>
+      <div class="tip">現場發現會直接沒收丟棄、不保管；違規者不得進場且不退票。</div>
+    </details>
+
+    <details class="g"><summary>💡 應援物規定</summary>
+      <ul>
+        <li>不接受任何形式的<b>禮物</b>。</li>
+        <li>手燈、螢光棒全長<b>不超過 30 公分</b>；禁止大光量／高亮度市售螢光棒，也不開放自製或改造應援棒。</li>
+        <li>團扇、扇子、應援板的板面／扇面（不含把手）<b>30×30 公分以內</b>。</li>
+        <li>使用時保持在<b>胸前高度</b>，不要舉過頭。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🎥 拍攝與現場規範</summary>
+      <ul>
+        <li>只能用<b>手機本身鏡頭</b>拍照錄影，僅供個人留念，禁止商業用途與直播；違規會被刪除影像並請離場。</li>
+        <li>現場會錄影錄音，入場即視為同意主辦與製作單位使用你的影像與聲音。</li>
+        <li>場內<b>禁止集體律動、跳動</b>；2、3 樓觀眾請勿站立踩腳。</li>
+        <li>平面特區可站立，但要在自己的座位範圍內，<b>不可站在椅子上</b>。</li>
+        <li>請勿推擠到舞台前；場內禁菸、禁嚼檳榔、禁飲食。</li>
+        <li>請勿丟擲螢光棒、保溫瓶、寶特瓶、鐵鋁罐、折疊傘等物品。</li>
+        <li>遵守動線與工作人員指示，耐心排隊。</li>
+      </ul>
+    </details>
+  </div>
 
 </div>
 
