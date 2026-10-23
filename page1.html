@@ -1,7 +1,366 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Music Expo 2026</title>
+<style>
+:root{--bg:#d8dbe0;--card:rgba(255,255,255,.58);--text:#1d232b;--sub:#667080;--line:rgba(255,255,255,.8);--edge:rgba(110,122,145,.25);--accent:#44587a;--accent2:#93a7c8;--warn:rgba(255,246,222,.85);--warnt:#6d5200;--sh:0 1px 0 rgba(255,255,255,.9) inset,0 8px 24px rgba(60,72,95,.12);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font-family:-apple-system,"Noto Sans TC","PingFang TC",sans-serif;line-height:1.5;background:radial-gradient(120% 60% at 50% 0%,#f1f3f6 0%,rgba(241,243,246,0) 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='white' fill-opacity='.75'%3E%3Cpath d='M18 10l1.6 3.4 3.7.4-2.8 2.5.8 3.7-3.3-1.9-3.3 1.9.8-3.7-2.8-2.5 3.7-.4z'/%3E%3Cpath d='M54 46l1.6 3.4 3.7.4-2.8 2.5.8 3.7-3.3-1.9-3.3 1.9.8-3.7-2.8-2.5 3.7-.4z'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(180deg,#cdd1d8,#e3e5e9 55%,#d3d7dd);background-attachment:fixed,fixed,fixed;min-height:100vh}
+.wrap{max-width:560px;margin:0 auto;padding:18px 14px 44px}
+h1{font-size:24px;margin:6px 0 2px;letter-spacing:.5px}
+.date{color:var(--sub);font-size:13px;margin-bottom:12px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.5px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:rgba(222,225,230,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:9px 0 10px;z-index:5}
+.track{height:6px;background:rgba(110,122,145,.22);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+.cnt{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:5px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.item,.info,.food,.order li{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh)}
+.item{display:flex;gap:12px;border-radius:16px;padding:12px;margin:10px 0;cursor:pointer}
+.item.now{border-color:var(--accent);box-shadow:0 0 0 2px rgba(68,88,122,.3),0 8px 24px rgba(60,72,95,.16)}
+.time{min-width:54px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);font-size:16px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.body{flex:1}
+.t{font-weight:600}
+.d{font-size:13px;color:var(--sub);margin-top:2px}
+.d a{color:var(--accent)}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:rgba(68,88,122,.1);border:1px solid var(--edge);color:var(--accent);margin-right:5px}
+input[type=checkbox]{width:24px;height:24px;accent-color:var(--accent);flex:none;margin-top:2px}
+.item.done{opacity:.55}
+.item.done .t{text-decoration:line-through;color:var(--sub)}
+.warn{background:var(--warn);color:var(--warnt);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:10px 12px;font-size:13px;margin:12px 0}
+button{background:var(--card);border:1px solid var(--line);color:var(--sub);border-radius:10px;padding:8px 14px;font-size:13px;margin-top:14px;box-shadow:var(--sh)}
+.sec{margin-top:30px}
+.sec h2{font-size:18px;margin:0 0 10px;padding-left:10px;border-left:3px solid var(--accent);letter-spacing:.5px}
+.info{border-radius:16px;padding:12px 14px;font-size:14px}
+.info b{color:var(--accent)}
+.order{list-style:none;margin:10px 0 0;padding:0;counter-reset:o}
+.order li{counter-increment:o;display:flex;gap:10px;align-items:center;border-radius:14px;padding:10px 12px;margin:7px 0;font-size:15px}
+.order li::before{content:counter(o);min-width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.order li small{color:var(--sub);margin-left:auto;font-size:12px}
+.order li.sp{border-style:dashed;border-color:var(--edge);counter-increment:none}.order li.sp::before{content:"★";background:rgba(110,122,145,.2);color:var(--sub)}
+.artist{border-radius:20px;overflow:hidden;margin:18px 0;color:#fff;box-shadow:0 14px 34px rgba(30,36,50,.28)}
+.artist img{width:100%;display:block}
+.artist .in{padding:14px 16px 16px}
+.artist h3{margin:0 0 8px;font-size:20px;letter-spacing:.5px}
+.artist p{margin:0 0 10px;font-size:13px;opacity:.85}
+.artist a.l{display:block;padding:10px 12px;margin:6px 0;border-radius:10px;text-decoration:none;color:#fff;font-size:14px;font-weight:600}
+.team{background:linear-gradient(160deg,#050a07,#0b2a18);border:1px solid #1fdc6a}
+.team h3{color:#3dff8a}
+.team a.l{background:#0f3d22;border:1px solid #1fdc6a}
+.ateez{background:linear-gradient(160deg,#050505,#2a0508);border:1px solid #e0182d}
+.ateez h3{color:#ff3b4e}
+.ateez a.l{background:#3a080d;border:1px solid #e0182d}
+.dl{background:var(--accent);color:#fff;border:none;font-size:14px;margin-top:10px}
+.food{border-radius:16px;padding:14px;margin:10px 0}
+.food h3{margin:0 0 4px;font-size:16px}
+.food .meta{font-size:13px;color:var(--sub);margin-bottom:8px}
+.food a.go{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600}
+.food .no{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;margin-right:6px;font-family:ui-monospace,Menlo,monospace}
+
+#lunch{--accent:#e0752a;--accent2:#f5b27a;--edge:rgba(224,117,42,.3)}
+#lunch h2{border-left-color:#e0752a}
+#lunch .food{background:rgba(255,241,225,.72);border-color:rgba(255,255,255,.85);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 8px 24px rgba(200,110,40,.14)}
+#lunch .food .tag{background:rgba(224,117,42,.12);color:#b95a17}
+#lunch .food a.go,#lunch .food .no{background:linear-gradient(135deg,#f08a3c,#d9651c);color:#fff}
+
+.g{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;margin:10px 0;overflow:hidden}
+.g summary{cursor:pointer;padding:13px 14px;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.g summary::-webkit-details-marker{display:none}
+.g summary::after{content:"＋";color:var(--accent);font-family:ui-monospace,Menlo,monospace}
+.g[open] summary::after{content:"－"}
+.g ul{margin:0;padding:0 14px 14px 32px;font-size:14px}
+.g li{margin:6px 0}
+.g li b{color:var(--accent)}
+.g .bad li b{color:#b3261e}
+.g .tip{margin:0 14px 14px;padding:9px 11px;border-radius:10px;background:rgba(68,88,122,.08);border:1px solid var(--edge);font-size:13px;color:var(--sub)}
+.gl{display:inline-block;margin:2px 0 8px;font-size:13px}
+.gl a{color:var(--accent)}
+
+#fromis{--accent:#2f8f62;--accent2:#8fd1b0;--edge:rgba(47,143,98,.3)}
+#fromis h2{border-left-color:#2f8f62}
+#fromis .food{background:rgba(226,246,236,.75)}
+#fromis .tag{background:rgba(47,143,98,.12);color:#23764f}
+#fromis ul{margin:8px 0 0;padding-left:20px;font-size:14px}
+#fromis li{margin:6px 0}
+#fromis .hd{font-weight:700;font-size:17px;letter-spacing:.3px}
+#fromis .dots{display:flex;gap:6px;margin:10px 0 2px}
+#fromis .dots i{flex:1;height:10px;border-radius:99px}
+
+#expo{--accent:#c2549c;--accent2:#e6a0cf;--edge:rgba(194,84,156,.3)}
+#expo h2{border-left-color:#c2549c}
+#expo .map{border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(30,36,50,.25);background:#14171d}
+#expo .map svg{display:block;width:100%;height:auto}
+#expo ul{margin:8px 0 0;padding-left:20px;font-size:14px}
+#expo li{margin:6px 0}
+#expo li b{color:#a23b7e}
+
+#fromis .pic{margin:12px 0}
+#fromis .pic img{width:100%;display:block;border-radius:16px;box-shadow:0 10px 26px rgba(30,60,45,.25)}
+#fromis .pic .cap{font-size:12px;color:var(--sub);margin:6px 2px 0}
+</style>
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+var items=[
+{t:"09:32",title:"高鐵台中出發",d:"0616 次・標準座 全票×2・5車 16E／16D",tag:"高鐵"},
+{t:"10:33",title:"抵達台北車站",d:"",tag:"高鐵"},
+{t:"10:40",title:"搭紅線（淡水信義線）到中山",d:"",tag:"捷運"},
+{t:"10:45",title:"轉綠線到小巨蛋站",d:"",tag:"捷運"},
+{t:"11:00",title:"小巨蛋 Music Expo Live 2026 打卡拍照",d:"拍照背板在 6 號門旁（詳見下方 Music Expo 打卡點）",tag:"打卡"},
+{t:"11:30",title:"參加小巨蛋活動",d:'<a href="https://www.instagram.com/p/Dd8wJaik2X_/?srtk=MTk2NmRtYnFlcDE1OQ==" target="_blank" rel="noopener">查看 IG 活動貼文</a>',tag:"活動"},
+{t:"11:40",title:"搭綠線回中山",d:"",tag:"捷運"},
+{t:"11:45",title:"中山站 香奈兒粉紅藝術牆打卡 💗",d:"COCO CRUSH 粉紅藝術牆・中山商圈（R9 CAFE 旁的粉紅建築）",tag:"打卡"},
+{t:"12:00",title:"午餐：娘子家咖啡",d:"✅ 已訂位 12:00 用餐",tag:"用餐"},
+{t:"13:00",title:"搭紅線到台北101／世貿站",d:"",tag:"捷運"},
+{t:"13:10",title:"TICC 拿娃・fromis_9 演唱會打卡",d:"Tomorrow Glow 打卡展架（詳見下方 fromis_9 打卡點）",tag:"打卡"},
+{t:"13:30",title:"搭紅線到東門，轉橘線到忠孝新生",d:"也可在忠孝新生走路前往華山",tag:"捷運"},
+{t:"14:00",title:"華山1914 首爾插畫展",d:"東二館・展期 10/23–10/26",tag:"展覽"},
+{t:"15:00",title:"回小巨蛋",d:"忠孝新生 → 橘線 → 松江南京 → 綠線 → 小巨蛋",tag:"捷運"},
+{t:"18:00",title:"演唱會開始 🎶",d:"Day2：&TEAM、NCT WISH、櫻坂46、ATEEZ ＋ Cover Stage",tag:"演唱會"},
+{t:"20:40",title:"演唱會結束・離場",d:"趕往台北車站",tag:"離場"},
+{t:"21:11",title:"高鐵 861 次 台北 → 台中",d:"6車 6D／6E・全票×2・TWD 1,400",tag:"高鐵"},
+{t:"21:50",title:"傳訊息通知家長 📱",d:"告知預計 22:15 抵達台中高鐵站，請家長出發",tag:"回家"},
+{t:"22:15",title:"抵達台中",d:"",tag:"高鐵"},
+{t:"22:20",title:"家長接送回草屯 🚗",d:"在台中高鐵站與家長會合",tag:"回家"}
+];
+var KEY="trip1025",state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function render(){
+  var list=document.getElementById("list"),h="",done=0,first=-1;
+  items.forEach(function(it,i){
+    var c=!!state[i];if(c)done++;else if(first<0)first=i;
+    h+='<div class="item'+(c?' done':'')+(first===i?' now':'')+'" data-i="'+i+'">'
+      +'<input type="checkbox" '+(c?'checked':'')+' aria-label="完成">'
+      +'<div class="time">'+it.t+'</div><div class="body"><div class="t">'+it.title+'</div>'
+      +'<div class="d"><span class="tag">'+it.tag+'</span>'+it.d+'</div></div></div>';
+  });
+  list.innerHTML=h;
+  document.getElementById("fill").style.width=(done/items.length*100)+"%";
+  document.getElementById("cnt").textContent=done+" / "+items.length+" 完成";
+  document.getElementById("nxt").textContent=first>=0?"下一步："+items[first].t:"全部完成 🎉";
+}
+document.getElementById("list").addEventListener("click",function(e){
+  if(e.target.tagName==="A")return;
+  var el=e.target.closest(".item");if(!el)return;
+  var i=el.getAttribute("data-i");
+  state[i]=!state[i];save();render();
+});
+document.getElementById("reset").onclick=function(){if(confirm("確定重置？")){state={};save();render()}};
+render();
+
+document.getElementById("dl").onclick=async function(){
+  var L=["Music Expo Live 2026 in Taipei - 10/25 (Sun) Day 2","地點：台北小巨蛋　開演：18:00　MC：櫻井翔","","【表演順序】"];
+  var n=0;document.querySelectorAll(".order li").forEach(function(li){var s=li.classList.contains("sp");if(!s)n++;L.push((s?"★ ":n+". ")+li.textContent.replace(/\s+/g," ").trim())});
+  L.push("","【應援影片】");
+  document.querySelectorAll(".artist").forEach(function(a){
+    L.push(a.querySelector("h3").textContent+":");
+    a.querySelectorAll("a.l").forEach(function(x,i){L.push("  "+(i+1)+". "+x.href)});
+  });
+  L.push("","【當日行程】");
+  items.forEach(function(it){L.push(it.t+"  "+it.title+(it.d&&it.d.indexOf("<")<0?"（"+it.d+"）":""))});
+  try{
+    var b=new Blob([L.join("\n")],{type:"text/plain"});
+    var d=(typeof claude!=="undefined")?await claude.use("downloads"):null;
+    if(!d){var u=URL.createObjectURL(b),k=document.createElement("a");k.href=u;k.download="concert-1025.txt";k.click();return}
+    await d.save({filename:"concert-1025.txt",data:b});
+  }catch(e){}
+};
+
+});
+</script>
+</head>
 <body>
-<h1>This is page 1</h1>
-<a href="page2.html">Go to page 2</a>
+<div class="wrap">
+  <h1>🎤 Music Expo 2026</h1>
+  <div class="date">2026/10/25（日）台中 → 台北 → 台中</div>
+  <div class="bar">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="cnt"><span id="cnt">0 / 0 完成</span><span id="nxt"></span></div>
+  </div>
+  <div id="list"></div>
+  <div class="warn">⚠️ 20:40 離場 → 21:11 高鐵只有約 30 分鐘，小巨蛋到台北車站＋進站很趕，建議提早離場或考慮備案班次。</div>
+  <button id="reset">重置全部勾選</button>
+
+
+  <div class="sec" id="expo">
+    <h2>📍 Music Expo 打卡點</h2>
+    <div class="map"><svg viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="台北小巨蛋打卡點示意圖" font-family="-apple-system,'Noto Sans TC',sans-serif">
+<rect width="360" height="330" fill="#14171d"/>
+<text x="14" y="20" fill="#fff" font-size="11" font-weight="700">10.24(SAT), 25(SUN)　台北小巨蛋</text>
+<g stroke="#e6a0cf" stroke-width="2" fill="none"><path d="M22 36V298H340"/><path d="M22 300H340" opacity="0"/></g>
+<text transform="translate(14 170) rotate(-90)" fill="#e6a0cf" font-size="10" text-anchor="middle">南京東路 Nanjing E. Rd.</text>
+<text x="190" y="318" fill="#e6a0cf" font-size="10" text-anchor="middle">敦化北路 Dunhua N. Rd.</text>
+<rect x="150" y="52" width="130" height="50" rx="3" fill="#1c3a38" stroke="#e6a0cf" stroke-width="2"/>
+<ellipse cx="205" cy="180" rx="130" ry="100" fill="#1c3a38" stroke="#e6a0cf" stroke-width="2"/>
+<ellipse cx="205" cy="180" rx="62" ry="38" fill="#14171d"/>
+<rect x="42" y="30" width="100" height="26" rx="3" fill="#1f9d4d"/>
+<text x="92" y="41" fill="#fff" font-size="9" font-weight="700" text-anchor="middle">台北小巨蛋站 2號出口</text>
+<text x="92" y="52" fill="#fff" font-size="7" text-anchor="middle">Taipei Arena Station</text>
+<g font-size="9" fill="#fff"><circle cx="88" cy="168" r="9" fill="#fff"/><text x="88" y="172" fill="#000" font-size="11" font-weight="700" text-anchor="middle">5</text>
+<text x="102" y="160">北大門・持票入口</text>
+<circle cx="102" cy="226" r="9" fill="#fff"/><text x="102" y="230" fill="#000" font-size="11" font-weight="700" text-anchor="middle">6</text>
+<text x="116" y="224">票務櫃台（6號門）</text>
+<text x="335" y="172" text-anchor="end">南大門・持票入口</text></g>
+<g><circle cx="62" cy="268" r="14" fill="#c2549c" opacity=".35"/><path d="M62 280l-7-11a8 8 0 1 1 14 0z" fill="#e6a0cf"/><circle cx="62" cy="262" r="3" fill="#14171d"/>
+<text x="82" y="266" fill="#f7c6e4" font-size="11" font-weight="700">拍照背板</text><text x="82" y="278" fill="#fff" font-size="8">Photo Backdrop</text></g>
+</svg></div>
+    <div class="food" style="margin-top:12px">
+      <ul>
+        <li><b>拍照背板</b>在小巨蛋圖上的左下角，靠近 <b>6 號門</b>與南京東路、敦化北路路口。</li>
+        <li><b>小巨蛋站 2 號出口</b>在圖的左上方，是搭綠線抵達小巨蛋最近的出口。</li>
+        <li><b>北大門（5 號）</b>與<b>南大門</b>是持票觀眾入口；<b>6 號門</b>是票務櫃台。</li>
+        <li>行程安排：<b>11:00</b> 先來拍照打卡，<b>15:00</b> 回小巨蛋時可以再拍一次。</li>
+      </ul>
+      <div class="d" style="margin-top:8px">以上依官方公告的示意圖整理，實際位置以現場指標為準。</div>
+    </div>
+  </div>
+
+  <div class="sec" id="lunch">
+    <h2>🍜 中山區午餐推薦</h2>
+    <div class="d" style="margin-bottom:6px">12:00 搭綠線回中山後的選擇</div>
+<div class="food"><h3><span class="no">1</span>池音 雞白湯ラーメン拉麵</h3>
+<div class="meta"><span class="tag">日式</span>營業時間 11:30–15:00</div>
+
+<a class="go" target="_blank" rel="noopener" href="https://share.google/aXZerXNUfF1NXQ2vw">查看店家資訊</a></div><div class="food"><h3><span class="no">2</span>娘子家咖啡</h3>
+<div class="meta"><span class="tag">韓式</span>12:00 開始營業</div>
+<div class="d" style="margin-bottom:8px">✅ 已訂位・12:00 用餐</div>
+
+<a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/8ZpETvGBrKvt7tVe8?g_st=ac">開啟地圖</a></div><div class="food"><h3><span class="no">3</span>Tella Tella Cafe</h3>
+<div class="meta"><span class="tag">日式昭和風</span></div>
+<div class="d" style="margin-bottom:8px">ILLIT、tripleS 來過</div>
+<a class="go" target="_blank" rel="noopener" href="https://share.google/dvUJN7QuFbNIjdcP9">查看店家資訊</a></div>
+<div class="food"><h3><span class="no">4</span>台北牛乳大王</h3>
+<div class="meta">7:00 營業</div>
+<a class="go" target="_blank" rel="noopener" href="https://share.google/55M6E12s2grdrd3ne">查看店家資訊</a></div>
+  </div>
+
+
+  <div class="sec" id="fromis">
+    <h2>💚 fromis_9 打卡點</h2>
+    <div class="food">
+      <div class="hd">Tomorrow Glow.</div>
+      <div class="meta"><span class="tag">打卡展架</span>2026 fromis_9 ASIA TOUR IN TAIPEI</div>
+      <div class="d">台灣聯合應援團隊設置的打卡展架，預覽圖共有 5 款（黃、粉、紫、綠、藍）。</div>
+      <div class="dots"><i style="background:#f6e27a"></i><i style="background:#f4a6b8"></i><i style="background:#c9a6e6"></i><i style="background:#9fd68f"></i><i style="background:#8fc6f0"></i></div>
+    </div>
+    <div class="pic"><img src="fromis-map.jpg" alt="fromis_9 展架位置" onerror="this.style.display='none'">
+      <div class="cap">展架位置：台北國際會議中心 TICC，位在圖右側標示「北」的出入口旁（福利兌換下方，紅圈處）。台北101／世貿站在圖下方。</div></div>
+    <div class="pic"><img src="fromis-preview.jpg" alt="fromis_9 展架預覽圖" onerror="this.style.display='none'">
+      <div class="cap">展架預覽圖（官方公告）</div></div>
+    <div class="food">
+      <div class="hd" style="font-size:15px">拍照注意事項</div>
+      <ul>
+        <li>拍照時請<b>勿觸碰或移動展架</b>。</li>
+        <li>請<b>排隊</b>並遵守秩序，避免影響通道動線。</li>
+        <li>展架的擺放位置與展出時間<b>可能依當天情況調整</b>，若有更動會在 IG 限時動態公告（圖片較模糊，請以官方帳號為準）。</li>
+      </ul>
+      <div class="d" style="margin-top:8px">公告帳號：Taiwan.flower_9</div>
+    </div>
+  </div>
+
+  <div class="sec" id="concert">
+    <h2>🎶 演唱會資訊</h2>
+    <div class="info">
+      <div><b>活動</b>　Music Expo Live 2026 in Taipei・10/25（日）Day 2</div>
+      <div><b>地點</b>　台北小巨蛋</div>
+      <div><b>開演</b>　18:00　<b>MC</b>　櫻井翔</div>
+      <div><b>入場</b>　預計 16:30　<b>長度</b>　約 150 分鐘</div>
+      <div><b>票務櫃台</b>　16:00–18:30（6 號門）</div>
+    </div>
+    <ol class="order">
+      <li class="sp">OPENING<small>全體藝人</small></li>
+      <li>&amp;TEAM</li>
+      <li>NCT WISH</li>
+      <li>櫻坂46</li>
+      <li class="sp">Special Performance／Cover Stage<small>&amp;TEAM</small></li>
+      <li>ATEEZ</li>
+      <li class="sp">ENDING<small>全體藝人</small></li>
+    </ol>
+    <button class="dl" id="dl">⬇️ 下載演唱會資訊（.txt）</button>
+
+    <div class="artist team">
+      <img src="team.jpg" alt="&amp;TEAM" onerror="this.style.display='none'">
+      <div class="in"><h3>&amp;TEAM</h3><p>第 1 位登場，另有 Special Performance／Cover Stage</p>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/E2Jq7OqCZw0?si=Eb5-OXArBSbRXhd5">▶ 應援影片 1</a>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/p1N7cihfRFo?si=YUrnNcnKrJqlI75W">▶ 應援影片 2</a>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/5aM-BF5keio?si=xO4YuC4-OcWeZ6yA">▶ 應援影片 3</a>
+      </div>
+    </div>
+
+    <div class="artist ateez">
+      <img src="ateez.jpg" alt="ATEEZ" onerror="this.style.display='none'">
+      <div class="in"><h3>ATEEZ</h3><p>第 4 位登場，壓軸藝人</p>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/cSwxQupCwRI?si=cmdFyUvVssxqSxuG">▶ 應援影片 1</a>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/4JMOYVn9dao?si=pI1JOicXQMHJUtuA">▶ 應援影片 2</a>
+        <a class="l" target="_blank" rel="noopener" href="https://youtu.be/3uN4ufH-23c?si=gpy5MZoVyh60Jjlk">▶ 應援影片 3</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="sec" id="guide">
+    <h2>📋 演唱會入場須知</h2>
+    <div class="gl">資料來源：<a href="https://www.instagram.com/p/DevgAmJGSoO/?xtok=bGMzMXJzY3pnbWV4" target="_blank" rel="noopener">寬宏藝術 IG 公告</a>（實際以現場公告為準）</div>
+
+    <details class="g" open><summary>🪪 實名制入場・票務</summary>
+      <ul>
+        <li>攜帶<b>身分證／健保卡／護照正本</b>，姓名與證號須與票券相符，不符無法入場。</li>
+        <li>每次進出場都會查票，沒有有效票券無法入場或再入場。</li>
+        <li>寬宏實名制會員帳號：本國籍用<b>身分證字號</b>、非本國籍用<b>護照號碼</b>。</li>
+        <li>現場取票：到票務服務櫃台，出示<b>訂單編號</b>＋<b>購票人身分證件正本</b>（不接受影印、截圖）。</li>
+        <li>超商取票者請在演出前幾天先取好票；票券遺失請在演出前先聯繫寬宏售票。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🚪 入口與安全檢查</summary>
+      <ul>
+        <li>持票觀眾入口：<b>北大門（5 號）</b>、<b>南大門</b>；票務櫃台在 <b>6 號門</b>。</li>
+        <li>拍照背板在 6 號門旁、南京東路與敦化北路路口附近。</li>
+        <li>入場有手提物檢查，請提早到場。</li>
+        <li>電子寄物櫃在主場館 <b>9 號出入口</b>與<b>西側廁所旁</b>，數量有限，客服 0800-458-075。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🚫 禁止攜帶物品</summary>
+      <ul class="bad">
+        <li><b>食物、飲料</b>（飲用水除外）。</li>
+        <li>長＋寬＋高<b>總和超過 90 公分</b>的包包、行李箱。</li>
+        <li><b>專業相機</b>、錄音機、攝影機材、增倍鏡頭（手機可以）。</li>
+        <li>各類武器、刀械。</li>
+        <li><b>GoPro、自拍棒</b>、長竿、三腳架、板凳等自行加高裝置。</li>
+        <li>雷射筆、煙火、噴煙裝置、充氣物、<b>無人機</b>。</li>
+        <li>會發出噪音的物品（如哨子、氣笛）。</li>
+        <li><b>含桿子或長竿</b>的標語、旗幟、橫幅、海報；內容不得有商業或不當政治訊息。</li>
+        <li>其他經主辦判斷有危險性的物品。</li>
+      </ul>
+      <div class="tip">現場發現會直接沒收丟棄、不保管；違規者不得進場且不退票。</div>
+    </details>
+
+    <details class="g"><summary>💡 應援物規定</summary>
+      <ul>
+        <li>不接受任何形式的<b>禮物</b>。</li>
+        <li>手燈、螢光棒全長<b>不超過 30 公分</b>；禁止大光量／高亮度市售螢光棒，也不開放自製或改造應援棒。</li>
+        <li>團扇、扇子、應援板的板面／扇面（不含把手）<b>30×30 公分以內</b>。</li>
+        <li>使用時保持在<b>胸前高度</b>，不要舉過頭。</li>
+      </ul>
+    </details>
+
+    <details class="g"><summary>🎥 拍攝與現場規範</summary>
+      <ul>
+        <li>只能用<b>手機本身鏡頭</b>拍照錄影，僅供個人留念，禁止商業用途與直播；違規會被刪除影像並請離場。</li>
+        <li>現場會錄影錄音，入場即視為同意主辦與製作單位使用你的影像與聲音。</li>
+        <li>場內<b>禁止集體律動、跳動</b>；2、3 樓觀眾請勿站立踩腳。</li>
+        <li>平面特區可站立，但要在自己的座位範圍內，<b>不可站在椅子上</b>。</li>
+        <li>請勿推擠到舞台前；場內禁菸、禁嚼檳榔、禁飲食。</li>
+        <li>請勿丟擲螢光棒、保溫瓶、寶特瓶、鐵鋁罐、折疊傘等物品。</li>
+        <li>遵守動線與工作人員指示，耐心排隊。</li>
+      </ul>
+    </details>
+  </div>
+
+</div>
+
 </body>
 </html>
