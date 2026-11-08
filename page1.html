@@ -77,7 +77,8 @@ a.go{display:inline-block;margin-top:8px;font-size:13px;color:var(--on);backgrou
 <li><div class="t">11:30</div><div class="body"><strong>午餐</strong><span>寄完行李後用餐</span></div></li>
 <li><div class="t">12:00</div><div class="body"><strong>前往高雄世運</strong><span>捷運紅線 R17 世運站</span></div></li>
 <li class="key"><div class="t">12:30</div><div class="body"><strong>抵達會場</strong><span>拍照、參加 challenge</span></div></li>
-<li class="key"><div class="t">13:00</div><div class="body"><strong>觀眾入場</strong></div></li>
+<li class="key"><div class="t">13:30</div><div class="body"><strong>拍 ATEEZ 手燈・娃娃</strong><span>集合：世運主場館主入口（正對面階梯）</span><span class="route">13:30 開始擺設，擺設加拍攝約 30 分鐘<br>一代、二代、三代手燈與娃娃都可以拍；拍照時看好自己的手燈和寶寶，避免拿錯</span></div></li>
+<li class="key"><div class="t">14:00</div><div class="body"><strong>觀眾入場</strong></div></li>
 <li class="key"><div class="t">15:00</div><div class="body"><strong>紅毯</strong><span>預計 90 分鐘內</span></div></li>
 <li class="key"><div class="t">17:00</div><div class="body"><strong>頒獎典禮開演</strong></div></li>
 <li class="key"><div class="t">22:00</div><div class="body"><strong>活動結束</strong><span>人潮多，注意搭車時間</span></div></li>
@@ -125,11 +126,10 @@ var h="";
 G.forEach(function(g){var a=D[g[0]];h+='<div class="grp">'+g[1]+'<small>'+g[2]+'・'+a.length+'</small></div><ul class="lst">';
 a.forEach(function(x){h+='<li>'+x[0]+(x[1]?'<span>'+x[1]+'</span>':'')+'</li>';});h+='</ul>';});
 document.getElementById('lineup').innerHTML=h;
-var C=[["Ice Cream","崔然竣","_hCHEC0uJZw"],["Catch Catch","YENA","dr2vbbm2MHk"],["Motto","ITZY","zncfkLz71Mc"],["腎上腺素","ATEEZ","3uN4ufH-23c"],["Bad","ATEEZ","cSwxQupCwRI"],["Drip","ATEEZ","Ji2bTtVdSEw"],["Mark on Me","&TEAM","E2Jq7OqCZw0"],["Good Boy","&TEAM","a1IdRt_kXUk"]];
-var P=['k9FHmPNZmao','BWEG-Za75wU','tWDqjIr9NoU','lgpIvc-_0fo','OICcKAfzDuo','IqeI9bJKQsk','HPNnU_si6sk','S09OPG7TvmQ','p1N7cihfRFo','5aM-BF5keio','FKYAJmWnDwI','o8ttqxvH6bI','nlJ_BM-QPIk','o4h9CsBwzJM','Uoddc-dUYKY'];
+var C=[["Ice Cream","崔然竣","_hCHEC0uJZw"],["Catch Catch","YENA","dr2vbbm2MHk"],["Motto","ITZY","zncfkLz71Mc"],["腎上腺素","ATEEZ","3uN4ufH-23c"],["Bad","ATEEZ","cSwxQupCwRI"],["Drip","ATEEZ","Ji2bTtVdSEw"],["Mark on Me","&TEAM","E2Jq7OqCZw0"],["Good Boy","&TEAM","a1IdRt_kXUk"],["Talk to You","崔然竣","k9FHmPNZmao"],["GGUM","崔然竣","BWEG-Za75wU"],["NEMONEMO","YENA","tWDqjIr9NoU"],["Ice on My Teeth","ATEEZ","lgpIvc-_0fo"],["Answer","ATEEZ","OICcKAfzDuo"],["Say My Name","ATEEZ","IqeI9bJKQsk"],["Bouncy","ATEEZ","HPNnU_si6sk"],["Bewitched","&TEAM","S09OPG7TvmQ"],["We on Fire","&TEAM","p1N7cihfRFo"],["Back to Life","&TEAM","5aM-BF5keio"],["Firework","&TEAM","FKYAJmWnDwI"],["女孩永不死","tripleS","o8ttqxvH6bI"],["你還活著嗎","tripleS","nlJ_BM-QPIk"],["寶寶花","tripleS","o4h9CsBwzJM"],["她是誰","KISS OF LIFE","Uoddc-dUYKY"]];
 function row(a,b,id){return '<li><div class="body"><strong>'+a+'</strong>'+(b?'<span>'+b+'</span>':'')+'</div><a class="go" style="margin:0;align-self:center" href="https://youtu.be/'+id+'" target="_blank" rel="noopener">觀看影片</a></li>';}
-var ch='<ul class="tl">';C.forEach(function(x,i){ch+=row(x[0],x[1],x[2]);});ch+='</ul><div class="grp">待補歌名<small>'+P.length+' 支</small></div><ul class="tl">';
-P.forEach(function(id,i){ch+=row('應援影片 '+(i+1),'歌名與藝人待確認',id);});ch+='</ul>';
+var O=[],M={};C.forEach(function(x){if(!M[x[1]]){M[x[1]]=[];O.push(x[1]);}M[x[1]].push(x);});
+var ch='';O.forEach(function(n){ch+='<div class="grp">'+n+'<small>'+M[n].length+' 首</small></div><ul class="tl">';M[n].forEach(function(x){ch+=row(x[0],'',x[2]);});ch+='</ul>';});
 document.getElementById('cheer').innerHTML=ch;
 var ids=['5','6','l','c'],tabs=ids.map(function(i){return document.getElementById('t'+i);}),panels=ids.map(function(i){return document.getElementById('p'+i);});
 var names=['day5','day6','lineup','cheer'];
